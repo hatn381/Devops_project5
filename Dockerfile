@@ -8,9 +8,10 @@ COPY package*.json ./
 RUN npm install
 
 # Copy source
-COPY . ./
+ADD . ./
 
 RUN npm run build
+EXPOSE 3000
 
 FROM nginx:1.15
 # Copy config nginx
@@ -21,5 +22,5 @@ RUN rm -rf ./*
 # Copy static assets from builder stage
 COPY --from=build-stage /app/build .
 # Containers run nginx with global directives and daemon off
-EXPOSE 3000
+
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
