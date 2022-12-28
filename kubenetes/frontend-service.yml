@@ -32,10 +32,10 @@ metadata:
   name: frontend-svc
 spec:
   type: LoadBalancer
-  selector:
-    app: frontend-app
   ports:
     - port: 80
       targetPort: 3000
       protocol: TCP
+  selector:
+    app: frontend-app
 
