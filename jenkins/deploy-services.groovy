@@ -1,5 +1,13 @@
 pipeline {
     agent any
+    environment {
+        GIT_URL = 'https://github.com/hatn381/Devops_project5.git'
+        WORKSPACE = 'SOURCE_CODE'
+        AWS_ACCOUNT_ID = "523411581086"
+        AWS_DEFAULT_REGION = "us-east-1" 
+        IMAGE_TAG = "latest"
+        REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+    }
     parameters{
         booleanParam(name: 'CREATE_INFAR', defaultValue: false, description: 'Flag to trigger create infrastructure')
         string(name: 'BRANCH_BUILD', defaultValue: 'staging', description: 'The branch of git')
@@ -14,6 +22,7 @@ pipeline {
             }
             steps {
                 sh 'aws eks --region us-east-1 update-kubeconfig --name Cap-Pro-Eks-Cluster'
+                sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | sudo docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
                 sh 'kubectl create secret docker-registry ecr-secret \
                     --docker-server=523411581086.dkr.ecr.us-east-1.amazonaws.com \
                     --docker-username=AWS \
