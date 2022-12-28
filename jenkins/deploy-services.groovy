@@ -14,7 +14,7 @@ pipeline {
             }
             steps {
                 sh 'aws eks --region us-east-1 update-kubeconfig --name Cap-Pro-Eks-Cluster'
-                sh '/usr/local/bin/kubectl create secret docker-registry ecr-secret \
+                sh 'kubectl create secret docker-registry ecr-secret \
                     --docker-server=523411581086.dkr.ecr.us-east-1.amazonaws.com \
                     --docker-username=AWS \
                     --docker-password=$(aws ecr get-login-password)'
@@ -27,14 +27,14 @@ pipeline {
                 }
             }
             steps {
-                sh '/usr/local/bin/kubectl get nodes -o wide'
-                sh '/usr/local/bin/kubectl apply -f kubenetes/frontend-service.yml'
+                sh 'kubectl get nodes -o wide'
+                sh 'kubectl apply -f kubenetes/frontend-service.yml'
             }
         }
         stage('Deployment status') {
             steps {
-                sh '/usr/local/bin/kubectl get nodes'
-                sh '/usr/local/bin/kubectl get pods'
+                sh 'kubectl get nodes'
+                sh 'kubectl get pods'
             }
         }
     }
