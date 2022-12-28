@@ -173,7 +173,7 @@ Resources:
     Type: 'AWS::EKS::Nodegroup'
     DependsOn: EKSCluster
     Properties:
-      ClusterName: !!Ref EKSClusterName
+      ClusterName: !Ref EKSClusterName
       InstanceTypes:
         - 'm5d.4xlarge'
       NodeRole: !GetAtt NodeInstanceRole.Arn
