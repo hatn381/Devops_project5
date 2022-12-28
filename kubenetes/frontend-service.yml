@@ -35,6 +35,7 @@ spec:
   selector:
     app: frontend-app
   ports:
-  - port: 80
-    targetPort: 3000
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
 
