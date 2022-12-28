@@ -23,7 +23,7 @@ spec:
         ports:
         - containerPort: 3000
       imagePullSecrets:
-        - ecr-secret
+        - name: ecr-secret
 
 ---
 apiVersion: v1
