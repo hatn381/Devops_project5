@@ -175,7 +175,7 @@ Resources:
     Properties:
       ClusterName: !Ref EKSClusterName
       InstanceTypes:
-        - 'm5d.4xlarge'
+        - 't3.medium'
       NodeRole: !GetAtt NodeInstanceRole.Arn
       ScalingConfig:
         MinSize: 1
